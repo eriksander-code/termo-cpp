@@ -1,0 +1,21 @@
+------- Regras E Funcionamento -------
+
+Este jogo, chamado TERMO se baseia em 
+uma chamada aleatoria de palavras que
+voce tem apenas SEIS chances para adi-
+vinhar qual.
+
+* Tente conforme tamanho das palavras
+sorteadas.
+* As letras em comum da sua tentativa
+e a palavra sorteada ficarao MAIUSCU-
+LAS.
+* Voce tem apenas SEIS chances para 
+acertar.
+* Voce pode adicionar pacotes persona-
+lizados de palavras (maximo de 100 por
+pacote).
+* Atencao: adicione o nome EXATO do 
+seu pacote, ou nao abrira.
+* Atencao: seu pacote deve estar no 
+mesmo diretorio do jogo.

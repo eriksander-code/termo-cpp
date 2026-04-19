@@ -1,0 +1,13 @@
+------------ SCORE -------------
+Tentativas:
+1a: parA
+2a: xotA
+3a: bocA
+4a: forA
+5a: tucA
+6a: rEcA
+
+Status de Jogo: PERDEDOR
+Palavra Correta: mesa
+--------------------------------
+

@@ -1,0 +1,1220 @@
+#include <iostream>
+#include "header.h"
+
+bool sortWord(std::string &_word, int selection, std::string pkgN);
+
+int main() {
+    //termo
+    bool looper = true;
+
+    do {
+        std::string word;
+        std::string wordTry;
+        Termo *game =new Termo;
+        int l{0};
+        char key;
+
+
+
+
+
+        do {
+            game->printStarter();
+            std::cin >> key;
+
+            #ifdef _WIN32
+                system("cls");
+            #else
+                system("clear");
+            #endif
+
+            if (key == '1') {
+                game->printDifficulty();
+                std::cin >> key;
+                switch (key) {
+                    case ('1'): sortWord(word, 1, "Null"); looper = false; break;
+                    case ('2'): sortWord(word, 2, "Null"); looper = false; break;
+                    case ('3'): sortWord(word, 3, "Null"); looper = false; break;
+                    case ('4'): sortWord(word, 4, "Null"); looper = false; break;
+                    case ('5'): sortWord(word, 5, "Null"); looper = false; break;
+                    case ('6'): sortWord(word, 6, "Null"); looper = false; break;
+                }
+                key == '0';
+            }
+            else if (key == '2') {
+                game->printRules();
+                std::cin >> key;
+            }
+            else if (key == '3') {
+                std::string nome;
+                std::cout << "Digite o nome EXATO (incluindo\nextensao) do seu pacote:\n";
+                std::cin >> nome;
+                if (sortWord(word, 7, nome) == false) {
+                    return 0;
+                }
+                looper = false;
+                key == '0';
+            }
+            else if (key == '4') {
+                game->scoreReader();
+                std::cin >> key;
+                key == '0';
+            }
+
+            #ifdef _WIN32
+                system("cls");
+            #else
+                system("clear");
+            #endif
+
+        } while (looper == true);
+
+        looper = false;
+        int i = 6;
+
+        do {
+            #ifdef _WIN32
+                system("cls");
+            #else
+                system("clear");
+            #endif
+
+            game->wordInfo(word);
+            std::cout << "Tentativas Restantes: " << i-1 << "\n";
+
+            if (l >= 1) {
+                game->printTry(word, wordTry);
+            } l++;
+
+
+            std::cin >> wordTry;
+
+            if (game->compareWords(word, wordTry) == true) {
+                break;
+            }
+
+            i--;
+        } while (i > 0);
+
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
+        game->scoreLogger(word);
+        game->scoreReader();
+
+        std::cout << "Veja em 'score.txt' sua pontuacao.\n";
+        std::cout << "Veja em 'AllPlay.txt' todas pontuacoes.\n";
+
+        delete game;
+
+        std::cout << "Deseja Jogar Novamente? [1/0]: ";
+        std::cin >> looper;
+        if ((looper != 0) && (looper != 1)) {
+            looper = 0;
+        }
+
+    } while (looper == true);
+
+    return 0;
+}
+
+#ifndef HEADER_H_INCLUDED
+#define HEADER_H_INCLUDED
+
+#include <iostream>
+#include <fstream>
+#include <conio.h>
+#include <cctype>
+#include <vector>
+
+class Termo {
+    private:
+        int qtyVogal(std::string _word);
+        int qtyCons(std::string _word);
+        std::vector<std::string> howM;
+        bool status{false};
+
+    public:
+
+        void scoreReader();
+        void scoreLogger(std::string _word);
+        void printTry(std::string _word, std::string _wordTry);
+        bool compareWords(std::string _word, std::string _wordTry);
+        void wordInfo(std::string _word);
+        void printRules();
+        void printStarter();
+        void printDifficulty();
+
+};
+
+void Termo::scoreReader() {
+    std::ifstream score;
+    std::string line;
+    int i = 0;
+
+    score.open("score.txt");
+            if (score.is_open() == true) {
+                while (getline(score, line)) {
+                    std::cout << line << std::endl;
+                }
+            }
+            else {
+                std::cout << "Missing Files.\n";
+            }
+    score.close();
+}
+
+void Termo::scoreLogger(std::string _word) {
+    {
+        std::ofstream arq;
+        int j = 0;
+        arq.open("score.txt");
+            arq << "------------ SCORE -------------\n";
+            arq << "Tentativas:\n";
+            for (std::string i : howM) {
+                arq << j+1 << "a: " << i << "\n";
+                j++;
+            }
+            if (status == true) {
+                arq << "\nStatus de Jogo: GANHADOR\n";
+            }
+            else if (status == false) {
+                arq << "\nStatus de Jogo: PERDEDOR\n";
+            }
+            arq << "Palavra Correta: " << _word << "\n";
+            arq << "--------------------------------\n\n";
+        arq.close();
+
+        arq.open("AllPlays.txt", std::ios::app);
+            arq << "------------ SCORE -------------\n";
+            arq << "Tentativas:\n";
+            for (std::string i : howM) {
+                arq << j+1 << "a: " << i << "\n";
+                j++;
+            }
+            if (status == true) {
+                arq << "\nStatus de Jogo: GANHADOR\n";
+            }
+            else if (status == false) {
+                arq << "\nStatus de Jogo: PERDEDOR\n";
+            }
+            arq << "Palavra Correta: " << _word << "\n";
+            arq << "--------------------------------\n\n";
+        arq.close();
+    }
+};
+
+void Termo::printTry(std::string _word, std::string _wordTry) {
+    //compareWords(_word, _wordTry);
+    int *i =new int{0};
+
+    for (auto it = howM.begin(); it != howM.end(); it++) {
+        (*i)++;
+
+        std::cout << (*i) << "a Tentativa: " << (*it) << std::endl;
+    }
+    delete i;
+};
+
+void Termo::wordInfo(std::string _word) {
+    std::cout << "--------- INFO ---------\n";
+    std::cout << "Tamanho: " << _word.size() << std::endl;
+    std::cout << "Qtde Vogal: " << qtyVogal(_word) << std::endl;
+    std::cout << "Qtde Consoante: " << qtyCons(_word) << std::endl;
+}
+
+int Termo::qtyCons(std::string _word) {
+    int cons{0};
+    for (int i = 0; i < _word.size(); i++) {
+        switch (toupper(_word[i])) {
+            case 'B': case 'C': case 'D': case 'F': case 'G':
+            case 'H': case 'J': case 'K': case 'L': case 'M':
+            case 'N': case 'P': case 'Q': case 'R': case 'S':
+            case 'T': case 'V': case 'W': case 'X': case 'Y':
+            case 'Z':
+                cons++;
+                break;
+        }
+    }
+    return cons;
+}
+
+int Termo::qtyVogal(std::string _word) {
+    int vgl{0};
+    for (int i = 0; i < _word.size(); i++) {
+        switch (toupper(_word[i])) {
+            case ('A'):
+            case ('E'):
+            case ('I'):
+            case ('O'):
+            case ('U'):
+                vgl++;
+                break;
+        }
+    }
+    return vgl;
+}
+
+bool Termo::compareWords(std::string _word, std::string _wordTry) {
+    static int i = 0;
+    howM.push_back(_wordTry);
+
+    for (int j = 0; j < _word.size(); j++) {
+        if (_wordTry == _word) {
+            status = true;
+            return true;
+        }
+        if (_wordTry[j] == _word[j]) {
+            howM.at(i)[j] = toupper(_wordTry[j]);
+        }
+    }
+
+    i++;
+    return false;
+}
+
+void Termo::printRules() {
+std::ifstream rules;
+std::string line;
+
+rules.open("rules.txt");
+    if (rules.is_open() == true) {
+        while (getline(rules, line)) {
+            std::cout << line << std::endl;
+        }
+    }
+    else {
+        std::cout << "Missing Files.\n";
+    }
+rules.close();
+}
+
+void Termo::printStarter() {
+std::ifstream starter;
+std::string line;
+
+starter.open("starter.txt");
+    if (starter.is_open() == true) {
+        while (getline(starter, line)) {
+            std::cout << line << std::endl;
+        }
+    }
+    else {
+        std::cout << "Missing Files.\n";
+    }
+starter.close();
+}
+
+void Termo::printDifficulty() {
+std::ifstream diff;
+std::string line;
+
+diff.open("diff.txt");
+    if (diff.is_open() == true) {
+        while (getline(diff, line)) {
+            std::cout << line << std::endl;
+        }
+    }
+    else {
+        std::cout << "Missing Files.\n";
+    }
+diff.close();
+}
+
+
+
+class Screen {
+    private:
+        char scr[40][30];
+
+    public:
+        void renderScreen();
+        void printScreen();
+};
+
+void Screen::renderScreen() {
+    for (int x = 0; x < 40; x++) {
+        for (int y = 0; y < 30; y++) {
+            scr[x][y] = ' ';
+            if ((x == 0) || (x == 39)) { scr[x][y] = '|'; };
+            if ((y == 0) || (y == 29)) { scr[x][y] = '-'; };
+        }
+    }
+}
+
+void Screen::printScreen() {
+    for (int x = 0; x < 40; x++) {
+        for (int y = 0; y < 30; y++) {
+            std::cout << scr[x][y];
+        }
+        std::cout << std::endl;
+    }
+}
+
+#endif // HEADER_H_INCLUDED
+
+#include <iostream>
+#include <random>
+#include <fstream>
+
+int qntArch(std::string nome) {
+    std::ifstream arq;
+    std::string line;
+    int indice = 0;
+
+    if (nome == "Null") {
+        return 100;
+    }
+
+    arq.open(nome);
+        if (arq.is_open() == true) {
+            while (getline(arq, line)) {
+                indice++;
+            }
+            return indice;
+        }
+        else {
+            std::cout << "Could not open the archive.\n";
+        }
+    arq.close();
+    return 0;
+}
+
+bool sortWord(std::string &_word, int selection, std::string pkgN) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(1, qntArch(pkgN));
+
+    std::ifstream arq;
+    std::string which_arq;
+    switch (selection) {
+        case (1): which_arq = "words-package-01.txt"; break;
+        case (2): which_arq = "words-package-02.txt"; break;
+        case (3): which_arq = "words-package-03.txt"; break;
+        case (4): which_arq = "words-package-04.txt"; break;
+        case (5): which_arq = "words-package-05.txt"; break;
+        case (6): which_arq = "words-package-06.txt"; break;
+    }
+
+    if (selection == 7) {
+        which_arq = pkgN;
+    }
+
+    arq.open(which_arq);
+        if (arq.is_open() == true) {
+            for (int i = 0; i <= dist(gen); i++) {
+                std::getline(arq, _word);
+            }
+            return true;
+        }
+        else {
+            std::cout << "Could not open the archive.\n";
+            return false;
+        }
+    arq.close();
+    return false;
+}
+
+------- Regras E Funcionamento -------
+
+Este jogo, chamado TERMO se baseia em 
+uma chamada aleatoria de palavras que
+voce tem apenas SEIS chances para adi-
+vinhar qual.
+
+* Tente conforme tamanho das palavras
+sorteadas.
+* As letras em comum da sua tentativa
+e a palavra sorteada ficarao MAIUSCU-
+LAS.
+* Voce tem apenas SEIS chances para 
+acertar.
+* Voce pode adicionar pacotes persona-
+lizados de palavras (maximo de 100 por
+pacote).
+* Atencao: adicione o nome EXATO do 
+seu pacote, ou nao abrira.
+* Atencao: seu pacote deve estar no 
+mesmo diretorio do jogo.
+
+------------ SCORE -------------
+Tentativas:
+1a: apogeu
+
+Status de Jogo: GANHADOR
+Palavra Correta: apogeu
+--------------------------------
+
+--------------- Termo ---------------
+
+Selecione Uma Opcao:
+1 - Jogar
+2 - Ver Regras
+3 - Add. pacote e Jogar
+4 - Ver ultimo Score
+
+------------ SCORE -------------
+Tentativas:
+6a: a
+7a: a
+8a: a
+9a: a
+10a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+4a: a
+5a: a
+6a: folha
+
+Status de Jogo: GANHADOR
+Palavra Correta: folha
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+5a: a
+6a: a
+7a: a
+8a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: e
+4a: sonho
+
+Status de Jogo: GANHADOR
+Palavra Correta: sonho
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+6a: aE
+7a: pEgo
+8a: ME
+9a: sa
+10a: mesa
+
+Status de Jogo: GANHADOR
+Palavra Correta: mesa
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: aeIou
+8a: peITo
+9a: seITa
+10a: uOIea
+11a: cOITo
+12a: noite
+
+Status de Jogo: GANHADOR
+Palavra Correta: noite
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+9a: a
+10a: a
+11a: s
+12a: s
+13a: d
+14a: d
+15a: f
+16a: f
+
+Status de Jogo: PERDEDOR
+Palavra Correta: casa
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: a
+4a: ideia
+
+Status de Jogo: GANHADOR
+Palavra Correta: ideia
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: a
+8a: a
+9a: a
+10a: a
+11a: a
+12a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: cidade
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: a
+4a: caminho
+
+Status de Jogo: GANHADOR
+Palavra Correta: caminho
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: historia
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: janela
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+8a: 1
+9a: 2
+10a: 3
+11a: 4
+12a: 5
+13a: 6
+14a: 7
+
+Status de Jogo: PERDEDOR
+Palavra Correta: poema
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: apogeu
+
+Status de Jogo: GANHADOR
+Palavra Correta: apogeu
+--------------------------------
+
+Selecione Dificuldade:
+1 - Muito Facil
+2 - Facil
+3 - Normal
+4 - Dificil
+5 - Muito Dificil
+6 - 1500
+
+casa
+sol
+lua
+agua
+fogo
+terra
+vento
+tempo
+dia
+noite
+caminho
+passo
+sonho
+ideia
+papel
+caneta
+livro
+mesa
+porta
+janela
+rua
+cidade
+campo
+flor
+folha
+arvore
+raiz
+fruto
+semente
+pedra
+rio
+mar
+onda
+areia
+ceu
+estrela
+nuvem
+chuva
+nevoa
+brisa
+calor
+frio
+sombra
+luz
+cor
+forma
+linha
+ponto
+plano
+ritmo
+som
+voz
+eco
+silencio
+gesto
+olhar
+sorriso
+riso
+lagrima
+pele
+corpo
+mente
+alma
+forca
+medo
+coragem
+vontade
+escolha
+chance
+queda
+salto
+inicio
+meio
+fim
+retorno
+ciclo
+ordem
+caos
+regra
+jogo
+risco
+ganho
+perda
+valor
+peso
+medida
+numero
+conta
+sinal
+mapa
+norte
+sul
+leste
+oeste
+centro
+limite
+margem
+ponte
+passo
+chegada
+montanha
+vale
+planicie
+colina
+trilha
+estrada
+atalho
+viagem
+partida
+cheiro
+sabor
+toque
+visao
+audicao
+memoria
+historia
+mito
+lenda
+conto
+verso
+poema
+prosa
+tinta
+quadro
+moldura
+escultura
+argila
+metal
+madeira
+vidro
+tecido
+linha
+agulha
+pano
+fio
+trama
+padrao
+textura
+superficie
+profundidade
+altura
+largura
+distancia
+espaco
+vazio
+cheio
+equilibrio
+peso
+pressao
+energia
+movimento
+repouso
+velocidade
+direcao
+sentido
+forca
+impulso
+choque
+vibracao
+onda
+frequencia
+tempo
+instante
+duracao
+ritmo
+pausa
+intervalo
+sequencia
+ordem
+serie
+conjunto
+grupo
+individuo
+origem
+fonte
+causa
+efeito
+resultado
+processo
+mudanca
+transformacao
+evolucao
+adaptacao
+sobrevivencia
+vida
+existencia
+mudanca
+transformacao
+evolucao
+adaptacao
+sobrevivencia
+vida
+existencia
+mudanca
+transformacao
+evolucao
+adaptacao
+sobrevivencia
+vida
+existencia
+alegria
+coragem
+cuidado
+respeito
+carinho
+paciência
+confiança
+esperança
+amizade
+humildade
+atenção
+equilíbrio
+liberdade
+verdade
+memória
+silêncio
+escolha
+caminho
+detalhe
+sentido
+costume
+vontade
+destino
+resposta
+presença
+saudade
+conforto
+esforço
+progresso
+mudança
+surpresa
+limite
+intenção
+valor
+conquista
+aprendizado
+rotina
+simplicidade
+harmonia
+interesse
+iniciativa
+calma
+foco
+ideia
+razão
+emoção
+tempo
+história
+imagem
+palavra
+atitude
+sucesso
+desafio
+melhora
+apoio
+ajuda
+união
+força
+sonho
+plano
+objetivo
+chance
+futuro
+passado
+presente
+gentileza
+desafio
+melhora
+apoio
+ajuda
+união
+força
+sonho
+plano
+objetivo
+chance
+futuro
+passado
+presente
+gentileza
+desafio
+melhora
+apoio
+ajuda
+união
+força
+sonho
+plano
+objetivo
+chance
+futuro
+passado
+presente
+gentileza
+desafio
+melhora
+apoio
+ajuda
+união
+força
+organização
+planejamento
+desenvolvimento
+aprendizado
+conhecimento
+experiência
+criatividade
+comunicação
+responsabilidade
+disciplina
+persistência
+adaptação
+observação
+concentração
+motivação
+colaboração
+produtividade
+eficiência
+capacidade
+autonomia
+flexibilidade
+estratégia
+objetividade
+qualidade
+prioridade
+compreensão
+interpretação
+participação
+consistência
+continuidade
+curiosidade
+iniciativa
+cooperação
+dedicação
+engajamento
+organização
+aperfeiçoamento
+clareza
+simplicidade
+estrutura
+planejamento
+execução
+resultado
+avaliação
+aprendizado
+melhoria
+progresso
+evolução
+equilíbrio
+estabilidade
+confiança
+comprometimento
+preparação
+atualização
+observação
+análise
+solução
+decisão
+reflexão
+contexto
+objetivo
+processo
+método
+prática
+aplicação
+resultado
+sucesso
+desafio
+superação
+crescimento
+mudança
+adaptação
+foco
+atenção
+controle
+organização
+persistência
+disciplina
+aplicação
+resultado
+sucesso
+desafio
+superação
+crescimento
+mudança
+adaptação
+foco
+atenção
+controle
+organização
+persistência
+disciplina
+aplicação
+resultado
+sucesso
+desafio
+superação
+crescimento
+mudança
+adaptação
+anticonstitucionalidade
+inconsequencialmente
+transubstanciação
+ininteligibilidade
+heterogeneamente
+desproporcionalidade
+incomensuravelmente
+irrevogavelmente
+multidisciplinaridade
+inexoravelmente
+incompatibilidade
+interoperabilidade
+epistemologicamente
+metaforicamente
+ontologicamente
+paradigmaticamente
+hipercomplexidade
+intersubjetividade
+transcendentalidade
+impreterivelmente
+irreconciliavelmente
+inverossimilhança
+circunstancialmente
+indissociavelmente
+intransigentemente
+pluridimensionalidade
+idiossincraticamente
+desestabilização
+consubstancialidade
+axiologicamente
+irreversibilidade
+contemporaneidade
+inexequivelmente
+imponderabilidade
+fenomenologicamente
+hermenêuticamente
+teleologicamente
+indeterminabilidade
+multifatorialidade
+inequivocamente
+autossuficiência
+inquestionavelmente
+interdisciplinaridade
+descontextualização
+incondicionalmente
+contraproducentemente
+irretratabilidade
+descentralização
+hipoteticamente
+circunspectamente
+inescrutavelmente
+imparcialidade
+instrumentalização
+incompatibilização
+peremptoriamente
+dialeticamente
+paradoxalmente
+insubordinadamente
+subjetividade
+historicidade
+contingencialidade
+singularidade
+complexificação
+reconfiguração
+ressignificação
+incompletude
+indissolubilidade
+inalterabilidade
+imprescritibilidade
+intangibilidade
+intransponibilidade
+irreprodutibilidade
+inalienabilidade
+irrefragavelmente
+incompreensibilidade
+insuscetibilidade
+inexaurivelmente
+irreparabilidade
+inalienabilidade
+irrefragavelmente
+incompreensibilidade
+insuscetibilidade
+inexaurivelmente
+irreparabilidade
+inalienabilidade
+irrefragavelmente
+incompreensibilidade
+insuscetibilidade
+inexaurivelmente
+irreparabilidade
+inalienabilidade
+irrefragavelmente
+incompreensibilidade
+insuscetibilidade
+inexaurivelmente
+irreparabilidade
+inalienabilidade
+irrefragavelmente
+incompreensibilidade
+insuscetibilidade
+assaz
+mui
+outrossim
+destarte
+percalço
+logro
+alvitre
+aprazível
+desvelo
+mercê
+tença
+pejo
+cousa
+fidalgo
+fidúcia
+diligência
+presteza
+afã
+transe
+infortúnio
+galhardia
+vassalo
+suserano
+estorvo
+desatino
+ardil
+vulto
+fazenda
+engenho
+sina
+desígnio
+arrebol
+faina
+contenda
+alcunha
+desvario
+alvíssaras
+primor
+denodo
+sobranceiro
+pungente
+afeição
+apoucado
+esmorecer
+porfia
+encômio
+brio
+lídimo
+afeito
+desabrido
+assombramento
+recato
+preste
+transeunte
+cativo
+ajuntamento
+alarde
+bravio
+cabedal
+desaforo
+desmando
+desventura
+diuturno
+escarcéu
+estirpe
+falácia
+formosura
+folgança
+gravame
+honraria
+injúria
+intento
+lavra
+lide
+mofino
+nobreza
+obséquio
+paragem
+quimera
+regozijo
+renhido
+serviço
+tardança
+temor
+usança
+valia
+vereda
+visagem
+zeloso
+arrimo
+despeito
+fruição
+guarida
+ímprobo
+lisonja
+miúdo
+padecer
+sobejamente
+talante
+valimento
+
+
+

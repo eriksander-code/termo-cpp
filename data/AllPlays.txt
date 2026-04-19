@@ -1,0 +1,330 @@
+------------ SCORE -------------
+Tentativas:
+6a: a
+7a: a
+8a: a
+9a: a
+10a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+4a: a
+5a: a
+6a: folha
+
+Status de Jogo: GANHADOR
+Palavra Correta: folha
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+5a: a
+6a: a
+7a: a
+8a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: e
+4a: sonho
+
+Status de Jogo: GANHADOR
+Palavra Correta: sonho
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+6a: aE
+7a: pEgo
+8a: ME
+9a: sa
+10a: mesa
+
+Status de Jogo: GANHADOR
+Palavra Correta: mesa
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: aeIou
+8a: peITo
+9a: seITa
+10a: uOIea
+11a: cOITo
+12a: noite
+
+Status de Jogo: GANHADOR
+Palavra Correta: noite
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+9a: a
+10a: a
+11a: s
+12a: s
+13a: d
+14a: d
+15a: f
+16a: f
+
+Status de Jogo: PERDEDOR
+Palavra Correta: casa
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: a
+4a: ideia
+
+Status de Jogo: GANHADOR
+Palavra Correta: ideia
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: a
+8a: a
+9a: a
+10a: a
+11a: a
+12a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: cidade
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: a
+4a: caminho
+
+Status de Jogo: GANHADOR
+Palavra Correta: caminho
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: historia
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: janela
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+8a: 1
+9a: 2
+10a: 3
+11a: 4
+12a: 5
+13a: 6
+14a: 7
+
+Status de Jogo: PERDEDOR
+Palavra Correta: poema
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+2a: apogeu
+
+Status de Jogo: GANHADOR
+Palavra Correta: apogeu
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: a
+4a: folha
+
+Status de Jogo: GANHADOR
+Palavra Correta: folha
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: sAcola
+8a: mora
+9a: mor
+10a: PASSa
+11a: PASSOca
+12a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: AParar
+4a: apogeu
+
+Status de Jogo: GANHADOR
+Palavra Correta: apogeu
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+3a: aeiou
+4a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+5a: a
+6a: INEXORAnte
+7a: INEXORAVEL
+8a: inexoravelmente
+
+Status de Jogo: GANHADOR
+Palavra Correta: inexoravelmente
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: CA‡a
+8a: CAca
+9a: apogeu
+10a: acacAr
+11a: CAssAr
+12a: CA‡a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: caÃ§a
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+5a: a
+6a: inexoravel
+7a: a
+8a: suserano
+
+Status de Jogo: GANHADOR
+Palavra Correta: suserano
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: passA
+8a: massA
+9a: malhA
+10a: aERio
+11a: pERiA
+12a: mERdA
+
+Status de Jogo: PERDEDOR
+Palavra Correta: terra
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: ruA
+8a: uvA
+9a: ovo
+10a: tIA
+11a: pIA
+12a: rIA
+
+Status de Jogo: PERDEDOR
+Palavra Correta: dia
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: a
+8a: a
+9a: a
+10a: a
+11a: a
+12a: a
+
+Status de Jogo: PERDEDOR
+Palavra Correta: noite
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: a
+8a: passa
+9a: almocar
+10a: ooooo
+11a: aaaAa
+12a: poquer
+
+Status de Jogo: PERDEDOR
+Palavra Correta: cidade
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: a
+8a: paassa
+9a: caRapaca
+10a: ToRque
+11a: TuRquia
+12a: terra
+
+Status de Jogo: GANHADOR
+Palavra Correta: terra
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: ovo
+8a: terra
+9a: merda
+10a: Porca
+11a: PASSa
+12a: passo
+
+Status de Jogo: GANHADOR
+Palavra Correta: passo
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: prozear
+8a: atRacar
+9a: MaRinheiro
+10a: MoRteiro
+11a: MERro
+12a: MERso
+
+Status de Jogo: PERDEDOR
+Palavra Correta: mercÃª
+--------------------------------
+
+------------ SCORE -------------
+Tentativas:
+7a: parA
+8a: xotA
+9a: bocA
+10a: forA
+11a: tucA
+12a: rEcA
+
+Status de Jogo: PERDEDOR
+Palavra Correta: mesa
+--------------------------------
+

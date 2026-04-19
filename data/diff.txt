@@ -1,0 +1,7 @@
+Selecione Dificuldade:
+1 - Muito Facil
+2 - Facil
+3 - Normal
+4 - Dificil
+5 - Muito Dificil
+6 - 1500

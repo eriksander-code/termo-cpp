@@ -1,0 +1,7 @@
+--------------- Termo ---------------
+
+Selecione Uma Opcao:
+1 - Jogar
+2 - Ver Regras
+3 - Add. pacote e Jogar
+4 - Ver ultimo Score
